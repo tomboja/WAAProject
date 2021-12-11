@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,12 +26,15 @@ public class Product {
 
     private double price;
 
-    private String status; // purchased or available
+    private boolean isAvailable; // purchased or available
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
 
     @ManyToMany
-    private List<Order> orderList = new ArrayList<>();
+    private List<Order> orderList;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
+    private List<Review> reviews;
 }

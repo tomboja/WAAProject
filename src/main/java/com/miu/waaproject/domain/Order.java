@@ -1,5 +1,6 @@
 package com.miu.waaproject.domain;
 
+import com.miu.waaproject.enums.Order_Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status; // can be one of CANCELLED, SHIPPED, ON_THE_WAY, DELIVERED
+    private Order_Status status; // can be one of CANCELLED, SHIPPED, ON_THE_WAY, DELIVERED
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
@@ -29,4 +30,8 @@ public class Order {
 
     @ManyToMany()
     private List<Product> items = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 }

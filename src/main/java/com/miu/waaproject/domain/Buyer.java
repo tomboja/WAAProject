@@ -32,17 +32,23 @@ public class Buyer {
     @Column(nullable = false)
     private String lastname;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private boolean approved;
 
     private final String role = "BUYER";
 
     // One buyer can follow many sellers and one seller can be followed by many buyers
-    @ManyToMany(fetch = FetchType.EAGER) // Cascade type
-    @JoinTable()
-    private List<Seller> followingSellers = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers") // Cascade type
+    @JoinTable(name = "buyer_seller_follow")
+    private List<Seller> followingSellers;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer")
     private List<Order> orders;
 
     @OneToOne() // relationship tobe filled
@@ -50,4 +56,12 @@ public class Buyer {
 
     @OneToOne() // relationship tobe filled
     private Address billingAddress;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer") // needs editing
+    private ShoppingCart shoppingCart;
+
+    private Integer points;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer")
+    private List<Review> reviews;
 }

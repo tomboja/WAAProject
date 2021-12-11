@@ -27,11 +27,15 @@ public class Seller {
 
     @Column(nullable = false)
     private String firstname;
+
     @Column(nullable = false)
     private String lastname;
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private boolean approved;
@@ -44,7 +48,6 @@ public class Seller {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Order> ordersReceived;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Buyer> followers = new ArrayList<>();
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Buyer> followers;
 }

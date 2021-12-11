@@ -7,5 +7,5 @@ package com.miu.waaproject.enums;
  */
 
 public enum Order_Status {
-    CANCELLED, SHIPPED, ON_THE_WAY, DELIVERED
+    RECEIVED, CANCELLED, SHIPPED, ON_THE_WAY, DELIVERED
 }
