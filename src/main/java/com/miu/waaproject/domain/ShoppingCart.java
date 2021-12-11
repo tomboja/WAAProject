@@ -25,12 +25,10 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne() // needs editing
-    private Buyer buyer;
+    @OneToOne()
+    @JoinColumn(name = "buyer_id")
+    private Buyer owner;
 
-    @OneToMany() // needs editing
-    private List<Product> products;
-
-
-
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private ProductOrder order;
 }
