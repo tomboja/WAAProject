@@ -22,7 +22,7 @@ public class SellerController {
 
     @PostMapping
     public ResponseEntity<Seller> saveNewSeller(@RequestBody Seller seller) {
-        return new ResponseEntity<Seller>(sellerService.saveSeller(seller), HttpStatus.CREATED);
+        return new ResponseEntity<>(sellerService.saveSeller(seller), HttpStatus.CREATED);
     }
 
     // fetch all seller for admin - admin controller
@@ -30,6 +30,6 @@ public class SellerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerById( @PathVariable("id") long id) {
-        return new ResponseEntity<Seller>(sellerService.getSellerById(id), HttpStatus.OK);
+        return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
     }
 }

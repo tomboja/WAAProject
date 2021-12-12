@@ -27,15 +27,16 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Seller saveSeller(Seller seller) {
-        log.info("Creating nes seller with email {} to the database", seller.getEmail());
+        log.info("Creating seller with email {} to the database", seller.getEmail());
         // Add password encoder  before saving
         return sellerRepository.save(seller);
     }
 
     @Override
     public Seller getSellerById(long id) {
+        log.info("Fetching seller by Id {} from the database", id);
         return sellerRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Seller", "Id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Seller", "Id", id, "fetching seller"));
     }
 }
