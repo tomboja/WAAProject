@@ -38,8 +38,8 @@ public class Address {
     private String country;
 
     @ManyToOne
-    private Buyer buyer;
+    private Buyer buyer; // id: 22
 
-    private Address_Type address_type; // SHIPPING_ADDRESS, BILLING_ADDRESS
+    private Address_Type address_type; // SHIPPING_ADDRESS, BILLING_ADDRESS, BOTH
 
 }

@@ -25,6 +25,9 @@ public class SellerController {
         return new ResponseEntity<Seller>(sellerService.saveSeller(seller), HttpStatus.CREATED);
     }
 
+    // fetch all seller for admin - admin controller
+    // fetch all buyer for admin - admin controller
+
     @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerById( @PathVariable("id") long id) {
         return new ResponseEntity<Seller>(sellerService.getSellerById(id), HttpStatus.OK);
