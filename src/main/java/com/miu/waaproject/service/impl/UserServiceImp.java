@@ -20,14 +20,14 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUserName(username);
+        User user = userRepo.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 //        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 //        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
         //return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
-        return org.springframework.security.core.userdetails.User.withUsername(user.getUserName()).password(user.getPassword())
+        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword())
                 .authorities(user.getRole()).build();
     }
 

@@ -5,7 +5,7 @@ import com.miu.waaproject.domain.Buyer;
 import java.util.List;
 
 public interface BuyerService {
-    Buyer AddNewBuyer(Buyer buyer);
+    Buyer addNewBuyer(Buyer buyer);
 
     List<Buyer> getAllBuyers();
 

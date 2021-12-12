@@ -37,11 +37,13 @@ public class Buyer {
     private String email;
 
     @Column(nullable = false)
+    @Transient
     private String password;
 
     @Column(nullable = false)
     private boolean approved;
 
+    @Transient
     private final String role = "BUYER";
 
     // One buyer can follow many sellers and one seller can be followed by many buyers

@@ -31,14 +31,16 @@ public class Seller {
     private String lastname;
 
     @Column(unique = true, nullable = false)
-    private String email;
+    private String email; // somebody@email.com
 
     @Column(nullable = false)
+    @Transient
     private String password;
 
     @Column(nullable = false)
     private boolean approved;
 
+    @Transient
     private final String role = "SELLER";
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")

@@ -1,12 +1,11 @@
-package com.miu.waaproject.service.Impl;
+package com.miu.waaproject.service.impl;
 
-import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.ProductOrder;
 import com.miu.waaproject.service.OrderService;
 
 import java.util.List;
 
-public class OrderImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {
     @Override
     public List<ProductOrder> getAllBuyers() {
         return null;

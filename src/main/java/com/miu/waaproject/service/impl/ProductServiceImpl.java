@@ -1,4 +1,4 @@
-package com.miu.waaproject.service.Impl;
+package com.miu.waaproject.service.impl;
 
 import com.miu.waaproject.domain.Product;
 import com.miu.waaproject.exceptions.ResourceNotFoundException;
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
         prod.setName(product.getName());
         prod.setDescription(product.getDescription());
         prod.setPrice(product.getPrice());
-        prod.setAvailable(!product.isAvailable());
+        prod.setAvailable(product.isAvailable());
         return prod;
     }
 

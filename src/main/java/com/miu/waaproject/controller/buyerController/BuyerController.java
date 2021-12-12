@@ -32,7 +32,7 @@ public class BuyerController {
     }
     @PostMapping("registration")
     public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
-        Buyer currentBuyer = buyerService.AddNewBuyer(buyer);
+        Buyer currentBuyer = buyerService.addNewBuyer(buyer);
         if(currentBuyer!=null)
             return new ResponseEntity<>(currentBuyer, HttpStatus.CREATED);
 
