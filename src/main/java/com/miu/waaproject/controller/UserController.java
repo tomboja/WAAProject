@@ -1,4 +1,4 @@
-package com.miu.waaproject.controller.userController;
+package com.miu.waaproject.controller;
 
 
 import lombok.AllArgsConstructor;

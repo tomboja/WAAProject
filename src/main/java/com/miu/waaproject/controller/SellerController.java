@@ -1,4 +1,4 @@
-package com.miu.waaproject.controller.SellerController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.service.impl.SellerServiceImpl;

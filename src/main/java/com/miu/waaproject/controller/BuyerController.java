@@ -1,4 +1,4 @@
-package com.miu.waaproject.controller.buyerController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Seller;
