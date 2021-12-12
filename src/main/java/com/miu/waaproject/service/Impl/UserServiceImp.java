@@ -1,24 +1,20 @@
 package com.miu.waaproject.service.impl;
 
 import com.miu.waaproject.domain.User;
-import com.miu.waaproject.repo.UserRepo;
+import com.miu.waaproject.repository.UserRepository;
+import com.miu.waaproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService, UserDetailsService {
 
-    private final UserRepo userRepo;
+    private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
 
 
