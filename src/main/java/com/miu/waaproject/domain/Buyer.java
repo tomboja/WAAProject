@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -32,11 +33,11 @@ public class Buyer {
     @Column(nullable = false)
     private String lastname;
 
-    @Column(nullable = false)
-    private String password;
-
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private boolean approved;
@@ -44,20 +45,17 @@ public class Buyer {
     private final String role = "BUYER";
 
     // One buyer can follow many sellers and one seller can be followed by many buyers
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers") // Cascade type
-    @JoinTable(name = "buyer_seller_follow")
-    private List<Seller> followingSellers;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers")
+    private Set<Seller> followingSellers = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer")
-    private List<Order> orders;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
+    private List<ProductOrder> orders;
 
-    @OneToOne() // relationship tobe filled
-    private Address shippingAddress;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyer_id")
+    private List<Address> addresses;
 
-    @OneToOne() // relationship tobe filled
-    private Address billingAddress;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer") // needs editing
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
     private Integer points;

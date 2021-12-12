@@ -1,11 +1,11 @@
 package com.miu.waaproject.domain;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -18,7 +18,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Seller {
     @Id
     @Column(name = "id", nullable = false)
@@ -42,12 +41,13 @@ public class Seller {
 
     private final String role = "SELLER";
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "seller", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
     private List<Product> products;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<Order> ordersReceived;
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    private List<ProductOrder> ordersReceived;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Buyer> followers;
+    @JoinTable(name = "buyer_seller_follow")
+    private Set<Buyer> followers = new HashSet<>();
 }

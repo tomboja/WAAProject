@@ -32,9 +32,10 @@ public class Product {
     @JoinColumn(name = "seller_id")
     private Seller seller;
 
-    @ManyToMany
-    private List<Order> orderList;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private ProductOrder order;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private List<Review> reviews;
 }
