@@ -62,6 +62,6 @@ public class Buyer {
 
     private Integer points;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
     private List<Review> reviews;
 }

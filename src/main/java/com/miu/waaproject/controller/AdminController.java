@@ -3,6 +3,7 @@ package com.miu.waaproject.controller;
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Review;
 import com.miu.waaproject.domain.Seller;
+import com.miu.waaproject.dto.SellerDto;
 import com.miu.waaproject.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/sellers")
-    public ResponseEntity<List<Seller>> getAllSellers() {
-        List<Seller> sellers = adminService.findAllSellers();
+    public ResponseEntity<List<SellerDto>> getAllSellers() {
+        List<SellerDto> sellers = adminService.findAllSellers();
         return new ResponseEntity<>(sellers, HttpStatus.OK);
     }
 

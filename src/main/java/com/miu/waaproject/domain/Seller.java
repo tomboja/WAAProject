@@ -1,6 +1,8 @@
 package com.miu.waaproject.domain;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -38,15 +40,16 @@ public class Seller {
     private String password;
 
     @Column(nullable = false)
-    private boolean approved;
+    private boolean approved = false;
 
     @Transient
-    private final String role = "SELLER";
+    private String role = "SELLER";
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "seller")
     private List<Product> products;
 
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductOrder> ordersReceived;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

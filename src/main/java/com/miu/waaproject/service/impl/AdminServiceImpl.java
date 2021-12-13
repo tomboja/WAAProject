@@ -3,15 +3,16 @@ package com.miu.waaproject.service.impl;
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Review;
 import com.miu.waaproject.domain.Seller;
-import com.miu.waaproject.repository.AdminRepository;
-import com.miu.waaproject.repository.BuyerRepository;
-import com.miu.waaproject.repository.ReviewRepository;
-import com.miu.waaproject.repository.SellerRepository;
+import com.miu.waaproject.domain.User;
+import com.miu.waaproject.dto.SellerDto;
+import com.miu.waaproject.repository.*;
 import com.miu.waaproject.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -20,10 +21,25 @@ public class AdminServiceImpl implements AdminService {
     SellerRepository sellerRepository;
     BuyerRepository buyerRepository;
     ReviewRepository reviewRepository;
+    UserRepository userRepository;
 
     @Override
-    public List<Seller> findAllSellers() {
-        return sellerRepository.findAll();
+    public List<SellerDto> findAllSellers() {
+        List<Seller> sellers = sellerRepository.findAll();
+        List<SellerDto> sellerDtos = new ArrayList<>();
+        for (Seller s: sellers) {
+            SellerDto sellerDto = new SellerDto();
+            sellerDto.setId(s.getId());
+            sellerDto.setFirstname(s.getFirstname());
+            sellerDto.setLastname(s.getLastname());
+            sellerDto.setEmail(s.getEmail());
+            sellerDto.setProducts(s.getProducts());
+            sellerDto.setFollowers(s.getFollowers());
+            sellerDto.setOrdersReceived(s.getOrdersReceived());
+            sellerDtos.add(sellerDto);
+        }
+
+        return sellerDtos;
     }
 
     @Override

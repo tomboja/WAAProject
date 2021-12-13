@@ -24,7 +24,7 @@ public class WaaProjectApplication {
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
-            userService.save(new User(null, "john", "customer", "ADMIN"));
+            userService.save(new User(null, "john@email.com", "customer", "ADMIN"));
         };
     }
 }
