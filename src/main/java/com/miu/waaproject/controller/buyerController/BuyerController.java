@@ -19,33 +19,26 @@ public class BuyerController {
     @GetMapping("All")
     public ResponseEntity<List<Buyer>> getAllBuyers() {
         List<Buyer> buyers = buyerService.getAllBuyers();
-        return new ResponseEntity<>(buyers,HttpStatus.OK);
+        return buyers!=null? new ResponseEntity<>(buyers,HttpStatus.OK): new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
 
     @GetMapping("{id}")
     public ResponseEntity<Buyer> getBuyerById(@PathVariable("id") Long id) {
         Buyer currentBuyer = buyerService.getBuyerById(id);
-        if(currentBuyer!=null)
-            return new ResponseEntity<>(currentBuyer,HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return currentBuyer!=null? new ResponseEntity<>(currentBuyer,HttpStatus.OK):new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
     @PostMapping("registration")
     public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
         Buyer currentBuyer = buyerService.AddNewBuyer(buyer);
-        if(currentBuyer!=null)
-            return new ResponseEntity<>(currentBuyer, HttpStatus.CREATED);
-
-        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        return currentBuyer!=null? new ResponseEntity<>(currentBuyer, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
 
     }
 
     @PutMapping
     public ResponseEntity<Buyer> updateBuyer(@RequestBody Buyer buyer){
           Buyer currentBuyer = buyerService.updateBuyer(buyer);
-          if(currentBuyer!=null)
-              return new ResponseEntity<>(currentBuyer,HttpStatus.OK);
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          return currentBuyer!=null?new ResponseEntity<>(currentBuyer,HttpStatus.OK):new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
 

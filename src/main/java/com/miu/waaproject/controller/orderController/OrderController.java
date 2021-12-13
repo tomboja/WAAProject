@@ -2,6 +2,7 @@ package com.miu.waaproject.controller.orderController;
 
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.ProductOrder;
+import com.miu.waaproject.enums.Order_Status;
 import com.miu.waaproject.service.BuyerService;
 import com.miu.waaproject.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -18,24 +19,45 @@ public class OrderController {
 
     @GetMapping("AllOrders")
     public ResponseEntity<List<ProductOrder>> getAllOrders() {
-        List<ProductOrder> Orders = orderService.getAllBuyers();
-        if(Orders.size()!=0)
-            return new ResponseEntity<>(Orders, HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<ProductOrder> Orders = orderService.getAllOrders();
+        return Orders.size()!=0? new ResponseEntity<>(Orders, HttpStatus.OK): new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     @PostMapping("Register")
-    public ResponseEntity<List<ProductOrder>> addNewOrder(@RequestBody ProductOrder productOrder) {
-        List<ProductOrder> orders = orderService.addNewOrder(productOrder);
-        if(orders.size()!=0)
-            return new ResponseEntity<>(orders, HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<ProductOrder> addNewOrder(@RequestBody ProductOrder productOrder) {
+        ProductOrder order = orderService.addNewOrder(productOrder);
+        return order!=null? new ResponseEntity<>(order, HttpStatus.OK): new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/user/{userId}")
+
+    @GetMapping("user/{userId}")
     public ResponseEntity<List<ProductOrder>> getOrdersByBuyerId(@PathVariable("userId") Long userId) {
         List<ProductOrder> Orders = orderService.getOrdersByBuyerId(userId);
-        if(Orders.size()!=0)
-            return new ResponseEntity<>(Orders, HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return Orders.size()!=0? new ResponseEntity<>(Orders, HttpStatus.OK): new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-    //@
+
+    @GetMapping("orderStatus/{orderId}")
+    public ResponseEntity<Order_Status> getOrderStatus(@PathVariable("orderId") Long orderId){
+        Order_Status currentOrder = orderService.getOrderStatus(orderId);
+        return currentOrder!=null? new ResponseEntity<>(orderService.getOrderStatus(orderId), HttpStatus.OK):
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("orderStatus/{orderId}/seller")
+    public ResponseEntity<Order_Status> setOrderStatusBySeller(@PathVariable("orderId") Long orderId){
+
+        Order_Status currentOrder = orderService.updateOrderStatusBySeller(orderId);
+
+        return currentOrder!=null? new ResponseEntity<>(orderService.updateOrderStatusBySeller(orderId), HttpStatus.OK):
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("orderStatus/{orderId}/buyer")
+    public ResponseEntity<Order_Status> setOrderStatusByBuyer(@PathVariable("orderId") Long orderId){
+
+        Order_Status currentOrder = orderService.updateOrderStatusByBuyer(orderId);
+
+        return currentOrder!=null? new ResponseEntity<>(orderService.updateOrderStatusByBuyer(orderId), HttpStatus.OK):
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
 }
