@@ -2,7 +2,6 @@ package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Review;
-import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.dto.SellerDto;
 import com.miu.waaproject.service.AdminService;
 import lombok.AllArgsConstructor;
@@ -26,17 +25,18 @@ public class AdminController {
     }
 
     @GetMapping("/buyers")
-    public ResponseEntity<List<Buyer>> getAllBuyers(){
+    public ResponseEntity<List<Buyer>> getAllBuyers() {
         List<Buyer> buyers = adminService.findAllBuyers();
-        return new ResponseEntity<>(buyers,HttpStatus.OK);
+        return new ResponseEntity<>(buyers, HttpStatus.OK);
     }
+
     @PostMapping("/seller/{id}")
-    public ResponseEntity<?> approveSeller(@PathVariable Long id){
+    public ResponseEntity<?> approveSeller(@PathVariable Long id) {
         return ResponseEntity.ok((adminService.approveSeller(id)));
     }
 
     @GetMapping("/reviews")
-    public ResponseEntity<List<Review>> getUnapprovedReviews(){
+    public ResponseEntity<List<Review>> getUnapprovedReviews() {
         return ResponseEntity.ok(adminService.findUnapprovedReviews());
     }
 }

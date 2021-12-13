@@ -46,11 +46,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean approveSeller(Long id) {
         Seller seller = sellerRepository.getById(id);
-        if (seller != null) {
-            seller.setApproved(true);
-            return true;
-        }
-        return false;
+        seller.setApproved(true);
+        return true;
     }
 
     @Override
