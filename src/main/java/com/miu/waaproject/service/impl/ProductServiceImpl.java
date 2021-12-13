@@ -1,8 +1,10 @@
 package com.miu.waaproject.service.impl;
 
 import com.miu.waaproject.domain.Product;
+import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.exceptions.ResourceNotFoundException;
 import com.miu.waaproject.repository.ProductRepository;
+import com.miu.waaproject.repository.SellerRepository;
 import com.miu.waaproject.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +26,17 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final SellerRepository sellerRepository;
 
     @Override
     public Product saveProduct(Product product) {
         log.info("Saving product to the database");
-        return productRepository.save(product);
+        // Only save product if seller exists in database
+        // Find Seller by email
+        Seller seller = sellerRepository
+                .findByEmail(product.getSeller_id());
+        return seller != null ?
+                productRepository.save(product) : null;
     }
 
     @Override
@@ -71,6 +79,6 @@ public class ProductServiceImpl implements ProductService {
         if (product != null) {
             productRepository.deleteById(id);
             return true;
-        }else  return false;
+        } else return false;
     }
 }
