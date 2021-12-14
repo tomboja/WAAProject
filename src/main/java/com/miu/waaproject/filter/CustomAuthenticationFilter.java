@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
+    //private String jwtSecret = "secret";
+
 
 
     @Override
@@ -58,13 +60,22 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        response.setHeader("access_token", access_token);
 //        response.setHeader("refresh_token", refresh_token);
 
-        // To pass the tokens in response body
+
+        List<String> roleList =   user.getAuthorities().stream().map(r -> r.getAuthority()).collect(Collectors.toList());
+        String role = roleList.get(0);
+
+
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
+        tokens.put("email", user.getUsername());
+        tokens.put("role", role);
 
         // Set response contentType
        response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
     }
+
+
 }
