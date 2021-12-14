@@ -48,4 +48,5 @@ public class Seller {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "buyer_seller_follow")
     private Set<Buyer> followers = new HashSet<>();
+
 }

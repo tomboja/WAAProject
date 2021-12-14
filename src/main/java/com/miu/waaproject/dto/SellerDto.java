@@ -30,7 +30,7 @@ public class SellerDto {
     private String firstname;
     private String lastname;
     private String email; // somebody@email.com
-    private boolean approved = false;
+    private boolean approved;
     private String role = "SELLER";
     private List<Product> products;
     private List<ProductOrder> ordersReceived;

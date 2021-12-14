@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
@@ -30,9 +30,14 @@ public class AdminController {
         return new ResponseEntity<>(buyers, HttpStatus.OK);
     }
 
-    @PostMapping("/seller/{id}")
-    public ResponseEntity<?> approveSeller(@PathVariable Long id) {
-        return ResponseEntity.ok((adminService.approveSeller(id)));
+    @PutMapping("/seller/{id}")
+    public ResponseEntity<?> approveSeller(@PathVariable Long id){
+        boolean status = adminService.approveSeller(id);
+
+        return status
+                ? new ResponseEntity<>("Successful", HttpStatus.OK)
+                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
     }
 
     @GetMapping("/reviews")

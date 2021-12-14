@@ -9,11 +9,13 @@ import com.miu.waaproject.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class AdminServiceImpl implements AdminService {
     AdminRepository adminRepository;
     SellerRepository sellerRepository;
@@ -28,6 +30,7 @@ public class AdminServiceImpl implements AdminService {
         for (Seller s : sellers) {
             SellerDto sellerDto = new SellerDto();
             sellerDto.setId(s.getId());
+            sellerDto.setApproved(s.isApproved());
             sellerDto.setFirstname(s.getFirstname());
             sellerDto.setLastname(s.getLastname());
             sellerDto.setEmail(s.getEmail());
@@ -44,10 +47,14 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean approveSeller(Long id) {
+    public boolean  approveSeller(Long id) {
         Seller seller = sellerRepository.getById(id);
-        seller.setApproved(true);
-        return true;
+        if(seller != null) {
+            seller.setApproved(true);
+            return true;
+        }
+        return  false;
+
     }
 
     @Override
