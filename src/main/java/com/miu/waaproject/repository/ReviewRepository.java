@@ -2,6 +2,9 @@ package com.miu.waaproject.repository;
 
 import com.miu.waaproject.domain.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -10,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+    @Query("select r from Review r where r.approved=false ")
+    List<Review> findByApproved();
 }

@@ -1,5 +1,6 @@
 package com.miu.waaproject.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,15 +27,10 @@ public class Product {
 
     private double price;
 
-    private boolean isAvailable; // purchased or available
+    private boolean isAvailable = true; // purchased or available
 
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller seller;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private ProductOrder order;
+    @NotNull
+    private String seller_id;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private List<Review> reviews;

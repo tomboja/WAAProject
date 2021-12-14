@@ -1,10 +1,12 @@
 package com.miu.waaproject.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,23 +33,20 @@ public class Seller {
     private String lastname;
 
     @Column(unique = true, nullable = false)
-    private String email;
+    private String email; // somebody@email.com
 
     @Column(nullable = false)
+    @Transient
     private String password;
 
     @Column(nullable = false)
-    private boolean approved;
+    private boolean approved = false;
 
-    private final String role = "SELLER";
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
-    private List<Product> products;
-
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<ProductOrder> ordersReceived;
+    @Transient
+    private String role = "SELLER";
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "buyer_seller_follow")
     private Set<Buyer> followers = new HashSet<>();
+
 }

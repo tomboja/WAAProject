@@ -1,6 +1,7 @@
 package com.miu.waaproject.domain;
 
 import com.miu.waaproject.enums.Order_Status;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,14 +24,9 @@ public class ProductOrder {
 
     private Order_Status status; // can be one of CANCELLED, SHIPPED, ON_THE_WAY, DELIVERED
 
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller seller;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
-    @ManyToOne
-    @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    @NotNull
+    private String buyer_email;
 }

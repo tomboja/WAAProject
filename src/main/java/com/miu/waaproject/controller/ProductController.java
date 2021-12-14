@@ -1,7 +1,7 @@
-package com.miu.waaproject.controller.SellerController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Product;
-import com.miu.waaproject.service.Impl.ProductServiceImpl;
+import com.miu.waaproject.service.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
-        return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.CREATED);
+        Product prod = productService.saveProduct(product);
+        return prod != null ?
+                new ResponseEntity<>(prod, HttpStatus.CREATED) :
+                new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/{id}")
@@ -34,7 +37,6 @@ public class ProductController {
         return product != null
                 ? new ResponseEntity<>(product, HttpStatus.OK)
                 : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-
     }
 
     @GetMapping()

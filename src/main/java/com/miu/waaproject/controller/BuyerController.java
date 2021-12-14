@@ -1,4 +1,4 @@
-package com.miu.waaproject.controller.buyerController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Seller;
@@ -30,8 +30,12 @@ public class BuyerController {
     }
     @PostMapping("registration")
     public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
-        Buyer currentBuyer = buyerService.AddNewBuyer(buyer);
-        return currentBuyer!=null? new ResponseEntity<>(currentBuyer, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+
+        Buyer currentBuyer = buyerService.addNewBuyer(buyer);
+        if(currentBuyer!=null)
+            return new ResponseEntity<>(currentBuyer, HttpStatus.CREATED);
+
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
     }
 

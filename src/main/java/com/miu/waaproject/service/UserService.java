@@ -1,4 +1,4 @@
-package com.miu.waaproject.service.impl;
+package com.miu.waaproject.service;
 
 import com.miu.waaproject.domain.User;
 

@@ -1,4 +1,4 @@
-package com.miu.waaproject.controller.orderController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.ProductOrder;

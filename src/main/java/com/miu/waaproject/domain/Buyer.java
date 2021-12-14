@@ -37,19 +37,15 @@ public class Buyer {
     private String email;
 
     @Column(nullable = false)
+    @Transient
     private String password;
 
-    @Column(nullable = false)
-    private boolean approved;
-
+    @Transient
     private final String role = "BUYER";
 
     // One buyer can follow many sellers and one seller can be followed by many buyers
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers")
     private Set<Seller> followingSellers = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
-    private List<ProductOrder> orders;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id")
@@ -60,6 +56,6 @@ public class Buyer {
 
     private Integer points;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "buyer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
     private List<Review> reviews;
 }

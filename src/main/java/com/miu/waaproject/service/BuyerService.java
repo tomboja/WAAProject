@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface BuyerService {
-    Buyer AddNewBuyer(Buyer buyer);
+    Buyer addNewBuyer(Buyer buyer);
 
     List<Buyer> getAllBuyers();
 

@@ -1,7 +1,7 @@
-package com.miu.waaproject.controller.SellerController;
+package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Seller;
-import com.miu.waaproject.service.Impl.SellerServiceImpl;
+import com.miu.waaproject.service.impl.SellerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
