@@ -10,19 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
-import java.util.Set;
-import javax.validation.Validator;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService, UserDetailsService {
 
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
-    private final Validator validator;
 
 
     @Override
@@ -39,15 +32,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public User save(@Valid User user) {
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
-        if (!violations.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (ConstraintViolation<User> constraintViolation : violations) {
-                sb.append(constraintViolation.getMessage());
-            }
-            throw new ConstraintViolationException("Error occurred: " + sb.toString(), violations);
-        }
+    public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
