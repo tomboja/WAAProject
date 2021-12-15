@@ -1,20 +1,18 @@
 package com.miu.waaproject.domain;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
-
 /**
  * @ProjectName: IntelliJ IDEA
  * @Author: tdessalegn
  * @Date: 12/10/21
  */
-
 @Entity
 @Getter
 @Setter
@@ -32,11 +30,13 @@ public class Seller {
     @Column(nullable = false)
     private String lastname;
 
+    @Email
     @Column(unique = true, nullable = false)
     private String email; // somebody@email.com
 
     @Column(nullable = false)
     @Transient
+    @Size(min=4)
     private String password;
 
     @Column(nullable = false)

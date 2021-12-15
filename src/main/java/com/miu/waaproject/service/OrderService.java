@@ -2,15 +2,13 @@ package com.miu.waaproject.service;
 
 import com.miu.waaproject.domain.ProductOrder;
 import com.miu.waaproject.enums.Order_Status;
-
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface OrderService {
 
     List<ProductOrder> getAllOrders();
 
-    List<ProductOrder> getOrdersByBuyerId(Long userId);
+    ProductOrder getOrdersByBuyerId(Long userId);
 
     ProductOrder addNewOrder(ProductOrder productOrder);
 

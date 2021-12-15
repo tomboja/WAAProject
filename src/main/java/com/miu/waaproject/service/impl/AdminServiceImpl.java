@@ -1,14 +1,16 @@
 package com.miu.waaproject.service.impl;
-
 import com.miu.waaproject.domain.Buyer;
 import com.miu.waaproject.domain.Review;
 import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.dto.SellerDto;
 import com.miu.waaproject.repository.*;
+import com.miu.waaproject.repository.AdminRepository;
+import com.miu.waaproject.repository.BuyerRepository;
+import com.miu.waaproject.repository.ReviewRepository;
+import com.miu.waaproject.repository.SellerRepository;
 import com.miu.waaproject.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +49,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean  approveSeller(Long id) {
+    public boolean approveSeller(Long id) {
         Seller seller = sellerRepository.getById(id);
         if(seller != null) {
             seller.setApproved(true);
             return true;
         }
         return  false;
-
     }
 
     @Override

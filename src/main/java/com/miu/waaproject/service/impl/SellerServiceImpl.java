@@ -12,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import java.util.Set;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -28,11 +31,19 @@ public class SellerServiceImpl implements SellerService {
     private final SellerRepository sellerRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final Validator validator;
 
     @Override
     public Seller saveSeller(Seller seller) {
+        Set<ConstraintViolation<Seller>> violations = validator.validate(seller);
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Seller> constraintViolation : violations) {
+                sb.append(constraintViolation.getMessage());
+            }
+            return null;
+        }
         log.info("Creating seller with email {} to the database", seller.getEmail());
-        // Add password encoder  before saving
         User user = new User();
         user.setEmail(seller.getEmail());
         user.setPassword(passwordEncoder.encode(seller.getPassword()));

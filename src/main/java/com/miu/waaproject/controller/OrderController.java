@@ -5,44 +5,38 @@ import com.miu.waaproject.domain.ProductOrder;
 import com.miu.waaproject.enums.Order_Status;
 import com.miu.waaproject.service.BuyerService;
 import com.miu.waaproject.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("order/")
+@RequestMapping("api/order")
 public class OrderController {
+    @Autowired
+    private OrderService orderService;
 
-    OrderService orderService;
 
-
-    @GetMapping("AllOrders")
+    @GetMapping
     public ResponseEntity<List<ProductOrder>> getAllOrders() {
         List<ProductOrder> Orders = orderService.getAllOrders();
         return Orders.size()!=0? new ResponseEntity<>(Orders, HttpStatus.OK): new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("Register")
+    @PostMapping
     public ResponseEntity<ProductOrder> addNewOrder(@RequestBody ProductOrder productOrder) {
         ProductOrder order = orderService.addNewOrder(productOrder);
         return order!=null? new ResponseEntity<>(order, HttpStatus.OK): new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-
-    @GetMapping("user/{userId}")
-    public ResponseEntity<List<ProductOrder>> getOrdersByBuyerId(@PathVariable("userId") Long userId) {
-        List<ProductOrder> Orders = orderService.getOrdersByBuyerId(userId);
-        return Orders.size()!=0? new ResponseEntity<>(Orders, HttpStatus.OK): new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("orderStatus/{orderId}")
+    @GetMapping("/{orderId}")
     public ResponseEntity<Order_Status> getOrderStatus(@PathVariable("orderId") Long orderId){
         Order_Status currentOrder = orderService.getOrderStatus(orderId);
         return currentOrder!=null? new ResponseEntity<>(orderService.getOrderStatus(orderId), HttpStatus.OK):
                 new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("orderStatus/{orderId}/seller")
+    @GetMapping("/orderStatus/{orderId}/seller")
     public ResponseEntity<Order_Status> setOrderStatusBySeller(@PathVariable("orderId") Long orderId){
 
         Order_Status currentOrder = orderService.updateOrderStatusBySeller(orderId);
@@ -51,7 +45,7 @@ public class OrderController {
                 new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("orderStatus/{orderId}/buyer")
+    @GetMapping("/orderStatus/{orderId}/buyer")
     public ResponseEntity<Order_Status> setOrderStatusByBuyer(@PathVariable("orderId") Long orderId){
 
         Order_Status currentOrder = orderService.updateOrderStatusByBuyer(orderId);

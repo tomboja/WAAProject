@@ -7,10 +7,7 @@ import java.util.List;
 
 public interface BuyerService {
     Buyer addNewBuyer(Buyer buyer);
-
     List<Buyer> getAllBuyers();
-
-    Buyer getBuyerById(Long id);
-
-    Buyer updateBuyer(Buyer buyer);
+    Buyer getBuyerById(Long buyerId);
+    Buyer updateBuyer(Buyer buyer, Long id);
 }

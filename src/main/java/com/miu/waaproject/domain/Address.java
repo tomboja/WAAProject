@@ -1,5 +1,6 @@
 package com.miu.waaproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.miu.waaproject.enums.Address_Type;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ public class Address {
     private String country;
 
     @ManyToOne
+    @JsonIgnoreProperties("addresses")
     private Buyer buyer; // id: 22
 
     private Address_Type address_type; // SHIPPING_ADDRESS, BILLING_ADDRESS, BOTH

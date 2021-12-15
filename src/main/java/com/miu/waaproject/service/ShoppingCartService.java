@@ -8,8 +8,8 @@ import com.miu.waaproject.domain.ShoppingCart;
 import java.util.List;
 
 public interface ShoppingCartService {
-    ShoppingCart addToCart(ShoppingCart shoppingCart, Buyer buyer, ProductOrder productOrder);//
-    public ShoppingCart removeProduct(ShoppingCart shoppingCart, Product product);//
-    ProductOrder getProductOrders(Buyer buyer);
+    ShoppingCart addToCart(Long buyerId, Long productId);//
+    public ShoppingCart removeFromCart(Long buyerId, Long productId);//
+    ProductOrder getProductOrders(Long buyerId);
 
 }

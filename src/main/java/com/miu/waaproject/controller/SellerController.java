@@ -22,7 +22,8 @@ public class SellerController {
 
     @PostMapping
     public ResponseEntity<Seller> saveNewSeller(@RequestBody Seller seller) {
-        return new ResponseEntity<>(sellerService.saveSeller(seller), HttpStatus.CREATED);
+        Seller newSeller = sellerService.saveSeller(seller);
+        return newSeller!=null? new ResponseEntity<>(newSeller, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
     }
 
     // fetch all seller for admin - admin controller

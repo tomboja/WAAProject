@@ -1,5 +1,4 @@
 package com.miu.waaproject.service.impl;
-
 import com.miu.waaproject.domain.Product;
 import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.exceptions.ResourceNotFoundException;
@@ -9,9 +8,11 @@ import com.miu.waaproject.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -27,10 +28,21 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
+    private final Validator validator;
 
     @Override
     public Product saveProduct(Product product) {
+        Set<ConstraintViolation<Product>> violations = validator.validate(product);
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Product> constraintViolation : violations) {
+                sb.append(constraintViolation.getMessage());
+            }
+            System.out.println(sb.toString());
+            return null;
+        }
         log.info("Saving product to the database");
+
         // Only save product if seller exists in database
         // Find Seller by email
         Seller seller = sellerRepository
@@ -80,5 +92,6 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById(id);
             return true;
         } else return false;
+
     }
 }

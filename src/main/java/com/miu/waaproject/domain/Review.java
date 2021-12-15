@@ -1,11 +1,16 @@
 package com.miu.waaproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  * @ProjectName: IntelliJ IDEA
@@ -18,6 +23,9 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Review {
     @Id
     @Column(name = "id", nullable = false)
@@ -25,6 +33,7 @@ public class Review {
     private Long id;
 
     @Column(nullable = false)
+    @Size(min=5, max=1000)
     private String content;
 
     private boolean approved;
