@@ -1,0 +1,68 @@
+.app {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+ul > li {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  padding-right: 20px;
+  font-size: large;
+  text-decoration: none;
+}
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+.signin {
+  margin-top: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.card-style {
+  border-top: none;
+}
+
+.product {
+  display: inline-grid;
+  height: 200px;
+  width: 24%;
+  margin-right: 20px;
+  border: 1px solid rgb(202, 199, 199);
+  border-radius: 10px;
+  margin: 10px 4px;
+  padding: 0px 8px;
+}
+
+.add-product {
+  width: 50%;
+}
+
+.form-group, .add-product {
+  margin-top: 15px;
+}
+
+.status {
+  color: red;
+  font-size: small;
+}
+
+.logout {
+  font-size: .8em;
+	position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  border: 1px solid rgb(202, 199, 199);
+}
