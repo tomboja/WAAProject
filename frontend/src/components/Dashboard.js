@@ -9,11 +9,10 @@ import { Route, Routes, useNavigate } from 'react-router'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../redux/login/loginSlice'
 import SellerList from "./Sellers";
-
+import ProductDetailsPage from "./ProductDetails";
 const Dashboard = (props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
   const user = useSelector(state => state.user)
 
   const logoutUser = (e) => {
@@ -40,7 +39,7 @@ const Dashboard = (props) => {
           { user.role !== 'BUYER' ?
             <li><Link to='/newProduct'>Add New Product</Link></li> : null
           }
-          
+
           {user.email === '' ? <li><Link to='/account'>Create Account</Link></li> : null }
           <li>
             {user.email === '' ?
@@ -60,6 +59,7 @@ const Dashboard = (props) => {
         <Route path='/sellerList' element={<SellerList />} />        
         <Route path='/account' element={<Registration />} />
         <Route path='/newProduct' element={<AddNewProductPage />} />
+        <Route path='/products/:id' element={<ProductDetailsPage />} />//newly added route
         <Route path='/signin' element={<LoginPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
