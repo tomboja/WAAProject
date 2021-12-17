@@ -25,7 +25,7 @@ public class WaaProjectApplication {
         return args -> {
             userService.save(new User(null, "john@email.com", "customer", "ADMIN"));
             userService.save(new User(null, "jane@email.com", "Password1", "SELLER"));
-            userService.save(new User(null, "jason@email.com", "Password1", "SELLER"));
+            userService.save(new User(null, "jason@email.com", "Password1", "BUYER"));
             userService.save(new User(null, "jagama@email.com", "Password1", "SELLER"));
         };
     }

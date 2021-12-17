@@ -5,6 +5,7 @@ import com.miu.waaproject.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -39,10 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login", "/api/*").permitAll();
-//        http.authorizeRequests().antMatchers("/api/users").hasAnyAuthority("ROLE_BUYER");
-//        http.authorizeRequests().antMatchers("/api/orders").hasAnyAuthority("ROLE_SELLER");
-//        http.authorizeRequests().antMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers("/api/sellers/**").hasAnyAuthority("SELLER", "ADMIN");
+        http.authorizeRequests().antMatchers("/api/buyer/**").hasAnyAuthority("BUYER", "ADMIN");
+        http.authorizeRequests().antMatchers("/api/products/**").permitAll();
+        http.authorizeRequests().antMatchers("/login", "/api/order").permitAll();
+        http.authorizeRequests().antMatchers("/api/**").hasAnyAuthority("ADMIN");
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
