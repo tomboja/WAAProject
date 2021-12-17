@@ -23,11 +23,11 @@ public class SellerController {
 
     private final SellerServiceImpl sellerService;
 
-    @PostMapping
-    public ResponseEntity<Seller> saveNewSeller(@RequestBody Seller seller) {
-        Seller newSeller = sellerService.saveSeller(seller);
-        return newSeller!=null? new ResponseEntity<>(newSeller, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
-    }
+//    @PostMapping
+//    public ResponseEntity<Seller> saveNewSeller(@RequestBody Seller seller) {
+//        Seller newSeller = sellerService.saveSeller(seller);
+//        return newSeller!=null? new ResponseEntity<>(newSeller, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+//    }
 
     // fetch all seller for admin - admin controller
     // fetch all buyer for admin - admin controller

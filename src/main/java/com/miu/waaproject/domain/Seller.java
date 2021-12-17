@@ -24,9 +24,11 @@ public class Seller {
     private Long id;
 
     @Column(nullable = false)
+    @Size(min=2, max=50)
     private String firstname;
 
     @Column(nullable = false)
+    @Size(min=2, max=50)
     private String lastname;
 
     @Email

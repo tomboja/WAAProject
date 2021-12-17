@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -21,14 +22,17 @@ public class Product {
     private Long id;
     @Column(nullable = false)
     @NotNull
+    @Size(min=2, max=50)
     private String name;
 
     @Column(nullable = false)
     @NotNull
+    @NotEmpty
     private String description;
 
     @NotNull
     private double price;
+
     private boolean isAvailable = true; // purchased or available
     @NotNull
     private String seller_id;

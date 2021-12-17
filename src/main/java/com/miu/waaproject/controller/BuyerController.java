@@ -22,16 +22,16 @@ public class BuyerController {
         return buyers!=null? new ResponseEntity<>(buyers,HttpStatus.OK): new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
-
-        Buyer currentBuyer = buyerService.addNewBuyer(buyer);
-        if(currentBuyer!=null)
-            return new ResponseEntity<>(currentBuyer, HttpStatus.CREATED);
-
-        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-
-    }
+//    @PostMapping
+//    public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
+//
+//        Buyer currentBuyer = buyerService.addNewBuyer(buyer);
+//        if(currentBuyer!=null)
+//            return new ResponseEntity<>(currentBuyer, HttpStatus.CREATED);
+//
+//        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+//
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Buyer> getBuyerById(@PathVariable("id") Long id) {
