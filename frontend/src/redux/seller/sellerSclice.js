@@ -12,21 +12,21 @@ const initialState = {
 }
 
 export const sellerSlice = createSlice({
-  name: 'seller',
+  name: 'sellers',
   initialState,
   reducers: {
-    addSeller: (state) => {
+    loadSellers: (sellerState, action) => {
+      return [...action.payload]
     },
-    decrement: (state) => {
-      console.log('State: ', state)
+    addSeller: (sellerState, action) => {
     },
-    incrementBy5: (state) => {
-      console.log('State: ', state)
-    }
+    removeSeller: (sellerState, action) => {
+    },
+    approveSeller: (sellerState, action) => {}
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementBy5 } = sellerSlice.actions
+export const { addSeller, removeSeller, approveSeller, loadSellers } = sellerSlice.actions
 
 export default sellerSlice.reducer

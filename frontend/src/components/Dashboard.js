@@ -15,7 +15,6 @@ const Dashboard = (props) => {
 
   const user = useSelector(state => state.user)
 
-
   const logoutUser = (e) => {
     e.preventDefault()
     dispatch(logout({

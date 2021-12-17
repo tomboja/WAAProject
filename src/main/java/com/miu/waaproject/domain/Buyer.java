@@ -2,10 +2,7 @@ package com.miu.waaproject.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -25,9 +22,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@ToString
 public class Buyer {
     @Id
     @Column(name = "id", nullable = false)
@@ -51,9 +46,6 @@ public class Buyer {
     @Size(min=4, max=50)
     private String password;
 
-    @Column(nullable = false)
-    private boolean approved;
-
     private final String role = "BUYER";
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers")
@@ -61,7 +53,6 @@ public class Buyer {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id")
-
     private List<Address> addresses;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

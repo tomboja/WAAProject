@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { loadProducts } from '../redux/product/productSlice'
 
-
 const ProductList = (props) => {
   const dispatch = useDispatch()
   const [products, setProducts] = useState([])

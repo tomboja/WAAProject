@@ -45,11 +45,11 @@ ul > li {
   padding: 0px 8px;
 }
 
-.add-product {
+.input-name {
   width: 50%;
 }
 
-.form-group, .add-product {
+.form-group, .input-name {
   margin-top: 15px;
 }
 

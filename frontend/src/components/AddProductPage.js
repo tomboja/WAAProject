@@ -12,7 +12,6 @@ const AddNewProduct = (props) => {
 
   const seller_email = useSelector(state => state.user.email)
   
-
   useEffect(() => {
     
   }, [])
@@ -50,17 +49,16 @@ const AddNewProduct = (props) => {
     setPrice({price: val})
   }
 
-
   return (<div>
     <h2>Seller can add product here</h2>
     <form onSubmit={(e) => submitHandler(e)} className="add-product">
       <div className="form-group">
-        <label htmlFor="product-name">Product Name</label>
+        <label htmlFor="input-label-name">Product Name</label>
         <input
           onChange={(e) => setProductName(e.target.value)}
           type="text"
           className="form-control"
-          id="product-name"
+          id="input-label-name"
           placeholder="Enter product name" />
       </div>
       <div className="form-group">
@@ -83,7 +81,6 @@ const AddNewProduct = (props) => {
             id="product-price"
             placeholder="Enter product price" />
         </div>
-
       </div>
       <button
         type="submit"

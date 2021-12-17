@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/buyer")
+@RequestMapping("/api/buyers")
 @RequiredArgsConstructor
 public class BuyerController {
 
@@ -22,12 +22,6 @@ public class BuyerController {
         return buyers!=null? new ResponseEntity<>(buyers,HttpStatus.OK): new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Buyer> getBuyerById(@PathVariable("id") Long id) {
-        Buyer currentBuyer = buyerService.getBuyerById(id);
-        return currentBuyer!=null? new ResponseEntity<>(currentBuyer,HttpStatus.OK):new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
-    }
     @PostMapping
     public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
 
@@ -37,6 +31,12 @@ public class BuyerController {
 
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Buyer> getBuyerById(@PathVariable("id") Long id) {
+        Buyer currentBuyer = buyerService.getBuyerById(id);
+        return currentBuyer!=null? new ResponseEntity<>(currentBuyer,HttpStatus.OK):new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
