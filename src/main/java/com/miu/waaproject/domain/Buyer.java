@@ -3,6 +3,8 @@ package com.miu.waaproject.domain;
 import com.fasterxml.jackson.annotation.*;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -51,8 +53,9 @@ public class Buyer {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "followers")
     private Set<Seller> followingSellers = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id")
+    @Fetch(FetchMode.JOIN)
     private List<Address> addresses;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
