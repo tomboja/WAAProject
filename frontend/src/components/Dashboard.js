@@ -8,6 +8,7 @@ import ErrorPage from './ErrorPage'
 import { Route, Routes, useNavigate } from 'react-router'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../redux/login/loginSlice'
+import SellerList from "./Sellers";
 
 const Dashboard = (props) => {
   const dispatch = useDispatch()
@@ -30,7 +31,11 @@ const Dashboard = (props) => {
     <div>
       <nav>
         <ul className="dashboard">
-          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/'>Home</Link></li> 
+          { user.role == 'ADMIN' ?
+            <li><Link to='/sellerList'>Seller List</Link> </li> : null
+               
+          }
           <li><Link to='/products'>Products</Link></li>
           { user.role !== 'BUYER' ?
             <li><Link to='/newProduct'>Add New Product</Link></li> : null
@@ -52,6 +57,7 @@ const Dashboard = (props) => {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/products' element={<ProductListPage />} />
+        <Route path='/sellerList' element={<SellerList />} />        
         <Route path='/account' element={<Registration />} />
         <Route path='/newProduct' element={<AddNewProductPage />} />
         <Route path='/signin' element={<LoginPage />} />

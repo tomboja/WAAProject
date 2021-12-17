@@ -25,12 +25,13 @@ const RegistrationPage = (props) => {
 
   const dispatch = useDispatch()
 
-  const baseUrl = 'http://localhost:8080/api'
+  const baseUrl = 'http://localhost:8080/api/register'
 
   const submitHandler = (e) => {
     e.preventDefault()
     const path = role === BUYER ? `${baseUrl}/buyers` : `${baseUrl}/sellers`
     const addressTosave = BUYER ? [billingAddress, shippingAddress] : []
+
     const body = {
       firstname,
       lastname,

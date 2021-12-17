@@ -11,8 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-@AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
+@AllArgsConstructor
 public class AdminController {
     private final AdminService adminService;
 
@@ -28,7 +28,7 @@ public class AdminController {
         return new ResponseEntity<>(buyers, HttpStatus.OK);
     }
 
-    @PutMapping("/seller/{id}")
+    @PutMapping("/sellers/{id}")
     public ResponseEntity<?> approveSeller(@PathVariable Long id){
         boolean status = adminService.approveSeller(id);
         return status
