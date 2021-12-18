@@ -24,7 +24,7 @@ public class UserController {
         return "Welcome to login";
     }
 
-    @PostMapping("/buyer")
+    @PostMapping("/buyers")
     public ResponseEntity<Buyer> addNewBuyer(@RequestBody Buyer buyer) {
 
         Buyer currentBuyer = buyerService.addNewBuyer(buyer);
@@ -35,7 +35,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/seller")
+    @PostMapping("/sellers")
     public ResponseEntity<Seller> saveNewSeller(@RequestBody Seller seller) {
         Seller newSeller = sellerService.saveSeller(seller);
         return newSeller!=null? new ResponseEntity<>(newSeller, HttpStatus.CREATED): new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
