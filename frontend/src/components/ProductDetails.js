@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addReview, loadReviews } from '../redux/review/reviewSclice'
+import { useNavigate } from 'react-router'
 
 const BUYER = 'BUYER'
 
 const ProductDetailsPage = () => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const prodAPI = 'http://localhost:8080/api/products/'
     const reviewApi = 'http://localhost:8080/api/reviews/'
@@ -64,12 +66,26 @@ const ProductDetailsPage = () => {
             .catch((error) => console.log('Error saving product review'))
     }
 
+    const deleteProductItem = () => {
+        axios.delete(prodAPI + param.id, { headers })
+            .then(response => {
+
+                setProdState(response.data);
+                navigate('/products')
+                console.log(response);
+            })
+            .catch(error => console.log(error.message))
+    };
+
     return (<div>
         <div className='productDetail'>
             <div><strong> Title:</strong> <label>{prodState.name}</label></div>
             <div><strong> Description:</strong><label>{prodState.description}</label></div>
             <div><strong> Price:</strong><label>{prodState.price}</label></div>
             <div><strong> Available:</strong><label>{prodState.available ? 'Yes' : 'No'}</label></div>
+            <div>
+                <button type="button" onClick={deleteProductItem}> Delete</button>
+            </div>
         </div>
 
         <div className="comments">

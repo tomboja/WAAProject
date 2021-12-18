@@ -51,8 +51,7 @@ public class ProductServiceImpl implements ProductService {
         // Find Seller by email
         Seller seller = sellerRepository
                 .findByEmail(product.getSeller_id());
-        return seller != null ?
-                productRepository.save(product) : null;
+        return productRepository.save(product);
     }
 
     @Override
