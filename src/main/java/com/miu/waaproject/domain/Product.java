@@ -17,8 +17,16 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Product {
+    public Product(Long id, String name, String description, double price, boolean isAvailable, String seller_id) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.isAvailable = isAvailable;
+        this.seller_id = seller_id;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
