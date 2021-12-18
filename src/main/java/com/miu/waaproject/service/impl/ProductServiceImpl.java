@@ -1,13 +1,16 @@
 package com.miu.waaproject.service.impl;
 import com.miu.waaproject.domain.Product;
+import com.miu.waaproject.domain.Review;
 import com.miu.waaproject.domain.Seller;
 import com.miu.waaproject.exceptions.ResourceNotFoundException;
 import com.miu.waaproject.repository.ProductRepository;
+import com.miu.waaproject.repository.ReviewRepository;
 import com.miu.waaproject.repository.SellerRepository;
 import com.miu.waaproject.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -28,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
+    private final ReviewRepository reviewRepository;
     private final Validator validator;
 
     @Override
@@ -64,6 +68,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsList() {
         log.info("Fetching all products from the database");
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Review> getProductReviews(long productId) {
+        return reviewRepository.findByProductId(productId);
     }
 
     @Override

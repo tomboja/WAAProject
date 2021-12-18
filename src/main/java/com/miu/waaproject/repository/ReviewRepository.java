@@ -15,4 +15,7 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r where r.approved=false ")
     List<Review> findByApproved();
+
+    @Query("select r from Review r where r.product_id = :productId")
+    List<Review> findByProductId(long productId);
 }

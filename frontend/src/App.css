@@ -80,3 +80,22 @@ ul > li {
   float: right;
   margin-top: 20px;
 }
+
+.detail {
+  margin-left: 20px;
+}
+
+.comments, .productDetail {
+  margin-top: 30px;
+}
+
+.review {
+  border: 1px solid rgb(235, 225, 225);
+  background-color: rgb(247, 248, 248);
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+.add-product {
+  margin-top: 10px;
+}

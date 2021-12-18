@@ -23,9 +23,6 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Review {
     @Id
     @Column(name = "id", nullable = false)
@@ -38,9 +35,7 @@ public class Review {
 
     private boolean approved;
 
-    @ManyToOne()
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private long product_id;
 
     @ManyToOne()
     @JoinColumn(name = "buyer_id")

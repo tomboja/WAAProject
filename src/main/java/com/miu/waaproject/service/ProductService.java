@@ -1,6 +1,7 @@
 package com.miu.waaproject.service;
 
 import com.miu.waaproject.domain.Product;
+import com.miu.waaproject.domain.Review;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface ProductService {
     public List<Product> getProductsList();
     public Product updateProduct(Product product, long id);
     public boolean deleteProductById(long id);
+
+     //Get product reviews
+     public List<Review> getProductReviews(long productId);
 }

@@ -8,7 +8,7 @@ import ErrorPage from './ErrorPage'
 import { Route, Routes, useNavigate } from 'react-router'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../redux/login/loginSlice'
-import SellerList from "./Sellers";
+import SellerList from "./SellersListPage";
 import ProductDetailsPage from "./ProductDetails";
 const Dashboard = (props) => {
   const dispatch = useDispatch()
@@ -59,7 +59,7 @@ const Dashboard = (props) => {
         <Route path='/sellerList' element={<SellerList />} />        
         <Route path='/account' element={<Registration />} />
         <Route path='/newProduct' element={<AddNewProductPage />} />
-        <Route path='/products/:id' element={<ProductDetailsPage />} />//newly added route
+        <Route path='/products/:id' element={<ProductDetailsPage />} />
         <Route path='/signin' element={<LoginPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>

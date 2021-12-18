@@ -1,6 +1,7 @@
 package com.miu.waaproject.controller;
 
 import com.miu.waaproject.domain.Product;
+import com.miu.waaproject.domain.Review;
 import com.miu.waaproject.service.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
-
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -37,6 +37,15 @@ public class ProductController {
 
         return product != null
                 ? new ResponseEntity<>(product, HttpStatus.OK)
+                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{productId}/reviews")
+    public ResponseEntity<List<Review>> getProductReviews(@PathVariable("productId") long productId) {
+        List<Review> reviews = productService.getProductReviews(productId);
+
+        return reviews != null
+                ? new ResponseEntity<>(reviews, HttpStatus.OK)
                 : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 

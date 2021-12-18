@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -36,6 +39,13 @@ public class Product {
     private boolean isAvailable = true; // purchased or available
     @NotNull
     private String seller_id;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
-    private List<Review> reviews;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @Fetch(FetchMode.JOIN)
+//    @JoinColumn(name = "product_id")
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+//    private List<Review> reviews;
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+//    private List<Review> reviews;
 }
