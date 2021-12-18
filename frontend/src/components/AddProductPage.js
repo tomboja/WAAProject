@@ -11,10 +11,6 @@ const AddNewProduct = (props) => {
   const [productprice, setPrice] = useState({ price: '' })
 
   const seller_email = useSelector(state => state.user.email)
-  
-  useEffect(() => {
-    
-  }, [])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -50,7 +46,7 @@ const AddNewProduct = (props) => {
   }
 
   return (<div>
-    <h2>Seller can add product here</h2>
+    <h2>Login as seller to be able to add products</h2>
     <form onSubmit={(e) => submitHandler(e)} className="add-product">
       <div className="form-group">
         <label htmlFor="input-label-name">Product Name</label>
@@ -59,6 +55,8 @@ const AddNewProduct = (props) => {
           type="text"
           className="form-control"
           id="input-label-name"
+          value={productName.name}
+          required
           placeholder="Enter product name" />
       </div>
       <div className="form-group">
@@ -68,6 +66,8 @@ const AddNewProduct = (props) => {
           className="form-control"
           id="product-description"
           rows="3"
+          value={productDescription.description}
+          required
           placeholder="Add product description"></textarea>
       </div>
       <div className="form-group">
@@ -79,12 +79,15 @@ const AddNewProduct = (props) => {
             type="text"
             className="form-control"
             id="product-price"
+            value={productprice.price}
+            required
             placeholder="Enter product price" />
         </div>
       </div>
       <button
         type="submit"
         className="btn btn-secondary add-product"
+        disabled={seller_email === ''}
       >Submit</button>
     </form>
   </div>)
