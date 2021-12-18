@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { loadProducts } from '../redux/product/productSlice'
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = (props) => {
   const dispatch = useDispatch()

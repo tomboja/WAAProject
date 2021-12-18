@@ -5,7 +5,6 @@ import { addBuyer } from '../redux/buyer/buyerSclice'
 import { addSeller } from '../redux/seller/sellerSclice'
 
 const BUYER = 'BUYER'
-const SELLER = 'SELLER'
 
 const RegistrationPage = (props) => {
   const [firstname, setFirstname] = useState('')

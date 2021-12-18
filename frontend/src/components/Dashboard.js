@@ -31,7 +31,7 @@ const Dashboard = (props) => {
       <nav>
         <ul className="dashboard">
           <li><Link to='/'>Home</Link></li> 
-          { user.role == 'ADMIN' ?
+          { user.role === 'ADMIN' ?
             <li><Link to='/sellerList'>Seller List</Link> </li> : null
                
           }
